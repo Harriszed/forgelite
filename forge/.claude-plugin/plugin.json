@@ -1,0 +1,17 @@
+{
+  "name": "forge",
+  "version": "0.3.2",
+  "description": "A lean, token-efficient build workflow: shape an idea into a spec, plan it, build it test-first, debug by evidence, verify before claiming done. Reads the project's CLAUDE.md first and never overrides it.",
+  "author": {
+    "name": "Harriszed"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/Harriszed/forge",
+  "keywords": [
+    "workflow",
+    "tdd",
+    "planning",
+    "subagents",
+    "token-efficiency"
+  ]
+}

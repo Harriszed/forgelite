@@ -1,0 +1,15 @@
+{
+  "name": "forge",
+  "owner": { "name": "Harriszed" },
+  "metadata": { "description": "Forge: a lean, token-efficient build workflow for Claude Code." },
+  "plugins": [
+    {
+      "name": "forge",
+      "source": "./forge",
+      "description": "Shape, plan, build, debug and verify with cheaper models where it is safe and Opus where it matters. A lean alternative to Superpowers.",
+      "version": "0.3.2",
+      "license": "MIT",
+      "keywords": ["workflow", "tdd", "planning", "subagents", "token-efficiency"]
+    }
+  ]
+}

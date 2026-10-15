@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '%s' '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"Forge is active. Before doing any task that adds, changes or fixes code, invoke the forge:starting-work skill with the Skill tool, then follow the Forge skill it points to (shaping, planning, building, debugging, verifying). Skip only for quick questions and one-line fixes. The project CLAUDE.md always wins over Forge.\"}}'",
+            "shell": "bash",
+            "async": false
+          }
+        ]
+      }
+    ]
+  }
+}

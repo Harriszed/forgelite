@@ -1,0 +1,15 @@
+Forge
+Copyright (c) 2026 Harriszed
+
+Forge is inspired by, and built with the intention of improving the speed,
+performance and token usage of, Superpowers:
+
+  Superpowers
+  Copyright (c) 2025 Jesse Vincent
+  https://github.com/obra/superpowers
+  Licensed under the MIT License.
+
+The workflow it describes (brainstorm, plan, test-first build with subagents,
+systematic debugging, verification before completion) originates with
+Superpowers. Forge's skill text is written independently and condensed.
+Forge is not affiliated with or endorsed by Superpowers or its author.

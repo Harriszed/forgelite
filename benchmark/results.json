@@ -1,0 +1,44 @@
+{
+  "task": "benchmark/task-list-starter: build a CLI to-do manager (add/list/edit/done/delete, tasks.json storage, filters, search, CSV and Markdown export), with a planted month bug in src/dates.js",
+  "date": "2026-10-14",
+  "notes": "One run per row. Same TASK.md and ANSWERS.md in every run. Costs use the index in scripts/token_report.py with Sonnet priced at 1/5 of Opus (an assumption).",
+  "runs": [
+    {
+      "name": "Superpowers 7.0.0, Opus main chat",
+      "api_calls": 64,
+      "output_tokens_main": 56034,
+      "cache_write_tokens": 277617,
+      "cache_read_tokens": 7055042,
+      "weighted_cost_millions": 1.33,
+      "tests_passing": 67,
+      "final_review_issues_fixed": 2,
+      "build_subagents": 0
+    },
+    {
+      "name": "Forge 0.2.2, Opus main chat",
+      "api_calls": 77,
+      "output_tokens_main": 48650,
+      "cache_write_tokens": 419252,
+      "cache_read_tokens": 7042883,
+      "weighted_cost_millions": 1.23,
+      "tests_passing": 75,
+      "final_review_issues_fixed": 9,
+      "build_subagents": 2
+    },
+    {
+      "name": "Forge 0.2.2, Sonnet main chat",
+      "api_calls": 110,
+      "output_tokens_main": 78151,
+      "cache_write_tokens": 620086,
+      "cache_read_tokens": 11512736,
+      "weighted_cost_millions": 0.77,
+      "tests_passing": 150,
+      "final_review_issues_fixed": 6,
+      "build_subagents": 3
+    }
+  ],
+  "size": {
+    "superpowers_7_0_0": { "skills": 15, "skill_md_lines": 3828, "session_start_chars": 3192 },
+    "forge_0_3_2": { "skills": 6, "skill_md_lines": 199, "session_start_chars": 320 }
+  }
+}

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 330" role="img" aria-labelledby="t d" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title id="t">Cost of the same task</title>
+  <desc id="d">Weighted token cost for building the same 8-task CLI project: Superpowers on Opus 1.33M, Forge on Opus 1.23M, Forge with a Sonnet main chat 0.77M.</desc>
+  <rect width="800" height="330" rx="12" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="32" y="44" font-size="20" font-weight="700" fill="#111827">Cost of the same task</text>
+  <text x="32" y="66" font-size="13" fill="#6b7280">Weighted token cost, millions (lower is better). Same spec, same answers, 75 / 67 / 150 tests passing.</text>
+  <g font-size="14" fill="#374151">
+    <text x="32" y="124">Superpowers</text>
+    <text x="32" y="142" font-size="12" fill="#6b7280">Opus main chat</text>
+    <text x="32" y="188">Forge</text>
+    <text x="32" y="206" font-size="12" fill="#6b7280">Opus main chat</text>
+    <text x="32" y="252">Forge</text>
+    <text x="32" y="270" font-size="12" fill="#6b7280">Sonnet main chat</text>
+  </g>
+  <rect x="190" y="104" width="520" height="40" rx="6" fill="#2a78d6"/>
+  <rect x="190" y="168" width="481" height="40" rx="6" fill="#eb6834"/>
+  <rect x="190" y="232" width="301" height="40" rx="6" fill="#c2410c"/>
+  <g font-size="16" font-weight="700" fill="#ffffff">
+    <text x="204" y="130">1.33M</text>
+    <text x="204" y="194">1.23M</text>
+    <text x="204" y="258">0.77M</text>
+  </g>
+  <g font-size="14" font-weight="700" fill="#111827">
+    <text x="722" y="130">baseline</text>
+    <text x="684" y="194">-8%</text>
+    <text x="504" y="258">-42%</text>
+  </g>
+  <text x="32" y="308" font-size="11" fill="#6b7280">Index: output x5, cache writes x1.25, cache reads x0.1. Sonnet tokens priced at 1/5 of Opus (assumption; at 1/3 the saving is about 23%).</text>
+</svg>
