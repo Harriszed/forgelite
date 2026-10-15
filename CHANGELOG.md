@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.1
+- `building`: the final Opus review and `forgelite:verifying` run automatically; they are no longer offered as optional.
+
 ## 0.4.0
 - Renamed from Forge to Forgelite (skill prefix is now `forgelite:`; default folders are `docs/forgelite/...`).
 

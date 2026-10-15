@@ -55,7 +55,7 @@ When a subagent hands over, read the handover file, then dispatch a fresh subage
 
 ## Finishing
 
-When all tasks are done, dispatch one cold reviewer (always Opus 5.5: `model: opus`, `effort: high`; never a cheaper model) on the full diff against the spec and plan. Give it the diff command, the spec and plan paths and a limit of about 40 tool calls; it reports in under 500 words. Tell it to look for correctness bugs first, then actually run the code with awkward input before reporting:
+When all tasks are done, run these two steps without asking the user whether to: they are required, not optional. First dispatch one cold reviewer (always Opus 5.5: `model: opus`, `effort: high`; never a cheaper model) on the full diff against the spec and plan. Give it the diff command, the spec and plan paths and a limit of about 40 tool calls; it reports in under 500 words. Tell it to look for correctness bugs first, then actually run the code with awkward input before reporting:
 - Huge, tiny, zero, negative, empty, missing and repeated values.
 - Wrong types or formats, and values that look like flags or options.
 - Unclear or misleading error messages: each must name what is wrong and what is expected.
