@@ -28,8 +28,8 @@ Building is best done on Sonnet (cheaper, and the plan already holds the thinkin
 - Dependent tasks: run in order.
 - After each subagent returns, read its diff and test output yourself before moving on. A report is not proof.
 - If a task is blocked or the plan is wrong, stop and tell the user what is wrong and your recommended fix. Never quietly improvise around the plan.
-- If a bug appears, switch to `forge:debugging`.
-- If this chat is getting long (many tasks done, big outputs), write a short progress note to `docs/forge/handovers/progress.md` (tasks done with commits, tasks left, decisions) so a new session can continue from the plan plus that note.
+- If a bug appears, switch to `forgelite:debugging`.
+- If this chat is getting long (many tasks done, big outputs), write a short progress note to `docs/forgelite/handovers/progress.md` (tasks done with commits, tasks left, decisions) so a new session can continue from the plan plus that note.
 
 ## Model choice (save tokens)
 
@@ -49,7 +49,7 @@ Aim for each subagent to stay around 200-300k tokens of context. It cannot see i
 
 Tell every subagent this rule in its prompt:
 - If you are **nearly finished** with the task, finish it.
-- Otherwise, stop and write `docs/forge/handovers/<task>-N.md`: what is done (with commits), what remains, files touched, decisions made, failing tests and what was tried. Then return and say you handed over.
+- Otherwise, stop and write `docs/forgelite/handovers/<task>-N.md`: what is done (with commits), what remains, files touched, decisions made, failing tests and what was tried. Then return and say you handed over.
 
 When a subagent hands over, read the handover file, then dispatch a fresh subagent (same model) with only the task text, plan path and handover path. Two handovers on one task means the task is too big: stop and ask the user whether to split it.
 
@@ -63,7 +63,7 @@ When all tasks are done, dispatch one cold reviewer (always Opus 5.5: `model: op
 - Crashes or stack traces shown to the user, and anything that could hang or freeze.
 - Spec requirements with no test.
 
-Add a test for each real finding. If a limit is needed that the spec did not set, pick a sensible one, record it, and tell the user. Fold in real findings, then invoke the `forge:verifying` skill with the Skill tool (do not just run checks inline).
+Add a test for each real finding. If a limit is needed that the spec did not set, pick a sensible one, record it, and tell the user. Fold in real findings, then invoke the `forgelite:verifying` skill with the Skill tool (do not just run checks inline).
 
 ## Rules
 

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" role="img" aria-labelledby="t d" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif">
-  <title id="t">The Forge workflow</title>
+  <title id="t">The Forgelite workflow</title>
   <desc id="d">Shape and plan run on Opus in one session, with reviews. Build runs in a new Sonnet session with Sonnet and Haiku subagents. A final Opus review checks the diff before verification.</desc>
   <rect width="800" height="280" rx="12" fill="#ffffff" stroke="#e5e7eb"/>
   <text x="32" y="40" font-size="20" font-weight="700" fill="#111827">Thinking on Opus, building on Sonnet</text>

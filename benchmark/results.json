@@ -15,7 +15,7 @@
       "build_subagents": 0
     },
     {
-      "name": "Forge 0.2.2, Opus main chat",
+      "name": "Forgelite 0.2.2, Opus main chat",
       "api_calls": 77,
       "output_tokens_main": 48650,
       "cache_write_tokens": 419252,
@@ -26,7 +26,7 @@
       "build_subagents": 2
     },
     {
-      "name": "Forge 0.2.2, Sonnet main chat",
+      "name": "Forgelite 0.2.2, Sonnet main chat",
       "api_calls": 110,
       "output_tokens_main": 78151,
       "cache_write_tokens": 620086,
@@ -39,6 +39,6 @@
   ],
   "size": {
     "superpowers_7_0_0": { "skills": 15, "skill_md_lines": 3828, "session_start_chars": 3192 },
-    "forge_0_3_2": { "skills": 6, "skill_md_lines": 199, "session_start_chars": 320 }
+    "forgelite_0_3_2": { "skills": 6, "skill_md_lines": 199, "session_start_chars": 320 }
   }
 }

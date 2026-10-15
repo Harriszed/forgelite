@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="Forge: same workflow as Superpowers, a fraction of the tokens" width="100%">
+  <img src="assets/banner.svg" alt="Forgelite: same workflow as Superpowers, a fraction of the tokens" width="100%">
 </p>
 
 <p align="center">
@@ -9,19 +9,19 @@
   <img alt="199 lines" src="https://img.shields.io/badge/instructions-199%20lines-9a3412">
 </p>
 
-# Forge
+# Forgelite
 
 **A lean, token-efficient build workflow for Claude Code.** Shape an idea into a spec, plan it, build it test-first, debug by evidence, and prove it works before saying "done", while spending expensive model time only where it pays off.
 
-Forge is built on the ideas of [**Superpowers**](https://github.com/obra/superpowers) by Jesse Vincent, which showed that a disciplined, skill-driven workflow makes Claude Code far more reliable. Forge was made with one goal: **keep that discipline, and improve speed, performance and token usage.** If you like what Superpowers does but want it to cost less and run faster, this is for you.
+Forgelite is built on the ideas of [**Superpowers**](https://github.com/obra/superpowers) by Jesse Vincent, which showed that a disciplined, skill-driven workflow makes Claude Code far more reliable. Forgelite was made with one goal: **keep that discipline, and improve speed, performance and token usage.** If you like what Superpowers does but want it to cost less and run faster, this is for you.
 
-> Forge is not affiliated with Superpowers or its author. See [Credits](#credits).
+> Forgelite is not affiliated with Superpowers or its author. See [Credits](#credits).
 
 ---
 
 ## The short version
 
-|  | Superpowers 7.0.0 | Forge |
+|  | Superpowers 7.0.0 | Forgelite |
 |---|---|---|
 | Skills | 15 | **6** |
 | Instruction lines | 3,828 | **199** |
@@ -32,26 +32,26 @@ Forge is built on the ideas of [**Superpowers**](https://github.com/obra/superpo
 | Opus for design and reviews, Sonnet for building | not built in | **built in** |
 | Plain-language summaries aimed at non-coders | not a focus | **yes** |
 
-<p align="center"><img src="assets/size-chart.svg" alt="Forge is 5% of the instruction lines of Superpowers" width="720"></p>
+<p align="center"><img src="assets/size-chart.svg" alt="Forgelite is 5% of the instruction lines of Superpowers" width="720"></p>
 
 ## Results
 
 We ran the same task three times: build a command-line to-do manager (add, list, edit, done, delete, filters, search, CSV and Markdown export, saved to a file) from the same starter project, with the same spec answers. The starter has a planted bug in its date code that the existing tests do not catch.
 
-<p align="center"><img src="assets/cost-chart.svg" alt="Forge costs 8% less on Opus and 42% less with a Sonnet main chat" width="720"></p>
+<p align="center"><img src="assets/cost-chart.svg" alt="Forgelite costs 8% less on Opus and 42% less with a Sonnet main chat" width="720"></p>
 
 | Run | Weighted cost | Tests passing | Real issues fixed by the final review |
 |---|---|---|---|
 | Superpowers, Opus main chat | 1.33M | 67 | 2 (3 more left unfixed) |
-| Forge, Opus main chat | 1.23M (**-8%**) | 75 | 9 |
-| Forge, Sonnet main chat | 0.77M (**-42%**) | 150 | 6 |
+| Forgelite, Opus main chat | 1.23M (**-8%**) | 75 | 9 |
+| Forgelite, Sonnet main chat | 0.77M (**-42%**) | 150 | 6 |
 
 All three met every requirement, and all three found and fixed the planted bug.
 
 **What to read into this, honestly:**
 
-- On the **same model**, Forge is only about 8% cheaper. The big saving comes from the model strategy: design and reviews on Opus, building on Sonnet.
-- Superpowers can run on Sonnet too, and would save money the same way. Forge makes that the default and builds the handover around it (see [Model strategy](#model-strategy)).
+- On the **same model**, Forgelite is only about 8% cheaper. The big saving comes from the model strategy: design and reviews on Opus, building on Sonnet.
+- Superpowers can run on Sonnet too, and would save money the same way. Forgelite makes that the default and builds the handover around it (see [Model strategy](#model-strategy)).
 - Costs are a **relative index** (output tokens x5, cache writes x1.25, cache reads x0.1), not a bill. Sonnet is priced at 1/5 of Opus, which is an assumption. At 1/3 the Sonnet run saves about 23% instead of 42%. Run `benchmark/scripts/token_report.py` with your own price.
 - One run per row, one small project, Windows only. Treat the numbers as a rough size of the effect, not a precise benchmark. The full reports are in [`benchmark/reports`](benchmark/reports) and the method is in [`benchmark`](benchmark).
 
@@ -60,30 +60,30 @@ A larger real-world check: one 14-task feature in a React Native app (a database
 ## Install
 
 ```bash
-claude plugin marketplace add Harriszed/forge
-claude plugin install forge@forge
+claude plugin marketplace add Harriszed/forgelite
+claude plugin install forgelite@forgelite
 ```
 
-Restart Claude Code. If you have Superpowers installed, **disable it** while you use Forge. They solve the same problem and compete for control:
+Restart Claude Code. If you have Superpowers installed, **disable it** while you use Forgelite. They solve the same problem and compete for control:
 
 ```bash
 claude plugin disable superpowers@superpowers-dev
 ```
 
-Forge starts itself: a tiny session-start hook (320 characters) tells Claude to use `forge:starting-work` before any task that adds, changes or fixes code. Quick questions and one-line fixes are skipped.
+Forgelite starts itself: a tiny session-start hook (320 characters) tells Claude to use `forgelite:starting-work` before any task that adds, changes or fixes code. Quick questions and one-line fixes are skipped.
 
 ## How it works
 
-<p align="center"><img src="assets/workflow.svg" alt="Forge workflow: shape and plan on Opus, build and verify on Sonnet" width="760"></p>
+<p align="center"><img src="assets/workflow.svg" alt="Forgelite workflow: shape and plan on Opus, build and verify on Sonnet" width="760"></p>
 
 | Skill | What it does |
 |---|---|
-| `forge:starting-work` | Reads your project's `CLAUDE.md` first (its rules always win), then routes to the right skill. |
-| `forge:shaping` | Interviews you one question at a time, offers improvement ideas for you to accept or reject, writes the spec, has it cold-reviewed. |
-| `forge:planning` | Turns the spec into small test-first tasks, has the plan cold-reviewed by Opus at high effort, shows you a 5-line summary. |
-| `forge:building` | Builds test-first, runs independent tasks as parallel subagents on the cheapest model that can do the job, then a final Opus review that runs the code with awkward input. |
-| `forge:debugging` | Reproduce, gather evidence, one hypothesis at a time, failing test, fix the cause. Stops after three failed fixes. |
-| `forge:verifying` | No "done" without real command output from this session. Ends with exactly what you should check next. |
+| `forgelite:starting-work` | Reads your project's `CLAUDE.md` first (its rules always win), then routes to the right skill. |
+| `forgelite:shaping` | Interviews you one question at a time, offers improvement ideas for you to accept or reject, writes the spec, has it cold-reviewed. |
+| `forgelite:planning` | Turns the spec into small test-first tasks, has the plan cold-reviewed by Opus at high effort, shows you a 5-line summary. |
+| `forgelite:building` | Builds test-first, runs independent tasks as parallel subagents on the cheapest model that can do the job, then a final Opus review that runs the code with awkward input. |
+| `forgelite:debugging` | Reproduce, gather evidence, one hypothesis at a time, failing test, fix the cause. Stops after three failed fixes. |
+| `forgelite:verifying` | No "done" without real command output from this session. Ends with exactly what you should check next. |
 
 ### Model strategy
 
@@ -95,7 +95,7 @@ Forge starts itself: a tiny session-start hook (320 characters) tells Claude to 
 | Build tasks | Sonnet (Haiku for pure mechanical edits, never tests) | The plan already holds the thinking. |
 | Final code review | Opus 5.5, high effort | The last gate before you see it. |
 
-A skill cannot change your chat's model, so when the plan is approved Forge tells you to **open a new Sonnet session** and say `build the plan at <path>`. This is deliberate: switching model mid-chat makes the new model re-read (and re-cache) the whole conversation at full price, and a builder does not need the design discussion anyway. The plan file is the handover.
+A skill cannot change your chat's model, so when the plan is approved Forgelite tells you to **open a new Sonnet session** and say `build the plan at <path>`. This is deliberate: switching model mid-chat makes the new model re-read (and re-cache) the whole conversation at full price, and a builder does not need the design discussion anyway. The plan file is the handover.
 
 ### Token habits built in
 
@@ -104,13 +104,13 @@ A skill cannot change your chat's model, so when the plan is approved Forge tell
 - Subagents are meant to stay around 200-300k tokens of context. Tasks are sized to fit, and a subagent that is not nearly done writes a handover file for a fresh one.
 - Long build chats write a short progress note so a new session can continue from the plan.
 
-## What Forge leaves out
+## What Forgelite leaves out
 
-To stay small, Forge does **not** include Superpowers' git-worktree skill, finish-branch skill, parallel-agent dispatch skill, or separate code-review request and receive skills. Parallel subagents and a final cold review are built into `forge:building` instead. If you rely on those skills, keep Superpowers for them.
+To stay small, Forgelite does **not** include Superpowers' git-worktree skill, finish-branch skill, parallel-agent dispatch skill, or separate code-review request and receive skills. Parallel subagents and a final cold review are built into `forgelite:building` instead. If you rely on those skills, keep Superpowers for them.
 
 ## Works with your project
 
-Forge reads `CLAUDE.md` before anything else and never overrides it. If your project already has a process (design docs, review steps, end-of-phase checklists, a different specs folder), Forge follows it and only fills the gaps. Specs and plans go in `docs/forge/specs` and `docs/forge/plans` unless your repo already uses another folder.
+Forgelite reads `CLAUDE.md` before anything else and never overrides it. If your project already has a process (design docs, review steps, end-of-phase checklists, a different specs folder), Forgelite follows it and only fills the gaps. Specs and plans go in `docs/forgelite/specs` and `docs/forgelite/plans` unless your repo already uses another folder.
 
 ## Reproduce the benchmark
 
@@ -129,11 +129,11 @@ cd benchmark/task-list-starter       # the starter project, TASK.md and ANSWERS.
 - Measured on small projects, one run each, on Windows with Node. Real projects will differ.
 - The session-start hook is a small `printf` run through bash. It works in Git Bash on Windows and on macOS and Linux, but has only been tested on Windows.
 - The token index is relative, and the Sonnet price ratio is an assumption.
-- Forge is opinionated about models. If you do not use Opus, Sonnet and Haiku, adjust the model names in the skills.
+- Forgelite is opinionated about models. If you do not use Opus, Sonnet and Haiku, adjust the model names in the skills.
 
 ## Credits
 
-Forge exists because of [**Superpowers**](https://github.com/obra/superpowers) by Jesse Vincent (obra), MIT licensed. The workflow shape (brainstorm, plan, test-first build with subagents, systematic debugging, verification before completion) comes from his work, and so does the idea of making agent discipline a set of composable skills. Forge's text is written from scratch and condensed, with a different model strategy, but it would not exist without his. Please go and star the original.
+Forgelite exists because of [**Superpowers**](https://github.com/obra/superpowers) by Jesse Vincent (obra), MIT licensed. The workflow shape (brainstorm, plan, test-first build with subagents, systematic debugging, verification before completion) comes from his work, and so does the idea of making agent discipline a set of composable skills. Forgelite's text is written from scratch and condensed, with a different model strategy, but it would not exist without his. Please go and star the original.
 
 ## License
 

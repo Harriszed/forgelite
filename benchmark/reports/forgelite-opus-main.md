@@ -3,8 +3,8 @@
 Fill in honestly from what actually happened. Do not guess. Write "none" where it applies.
 
 ## 1. Workflow
-- Plugin/workflow used (Superpowers or Forge): Forge
-- Skills invoked, in order: forge:starting-work → forge:shaping → forge:planning → forge:building → forge:verifying
+- Plugin/workflow used (Superpowers or Forgelite): Forgelite
+- Skills invoked, in order: forgelite:starting-work → forgelite:shaping → forgelite:planning → forgelite:building → forgelite:verifying
 - Number of questions asked to the user: 0 (all answers taken from ANSWERS.md, as the request asked)
 - Did a cold review happen on the spec? (who/what model/findings count): Yes — fresh general-purpose subagent, Sonnet, 15 findings. All folded in (e.g. dropped comma-tags and a separate `search` command as extra scope, defined exit codes, export details, id errors, file shape rules).
 - Did a cold review happen on the plan? (who/what model/findings count): Yes — fresh general-purpose subagent, Opus (effort medium), 15 findings. 14 folded in (save-failure message, `--out tasks.json` guard, Windows run check, BOM, missing tests, option parsing rules, temp cleanup, branch named). Rejected: years below 1000 (out of scope) and a CSV BOM for Excel (not needed for this user).

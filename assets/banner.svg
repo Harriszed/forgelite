@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320" role="img" aria-labelledby="t d">
-  <title id="t">Forge</title>
-  <desc id="d">Forge: a lean, token-efficient build workflow for Claude Code</desc>
+  <title id="t">Forgelite</title>
+  <desc id="d">Forgelite: a lean, token-efficient build workflow for Claude Code</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#14161d"/>
@@ -24,7 +24,7 @@
     <path d="M0 -92C14 -64 40 -52 36 -22C34 -4 18 4 0 4C-18 4 -34 -6 -34 -24C-34 -40 -20 -46 -14 -62C-6 -52 -2 -70 0 -92Z" fill="url(#flame)"/>
     <path d="M0 -42C8 -28 20 -24 18 -10C17 -2 9 3 0 3C-9 3 -17 -3 -17 -12C-17 -22 -8 -26 0 -42Z" fill="#fde68a" opacity="0.9"/>
   </g>
-  <text x="290" y="168" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="112" font-weight="700" fill="#f5f5f4" letter-spacing="-2">Forge</text>
+  <text x="290" y="168" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="112" font-weight="700" fill="#f5f5f4" letter-spacing="-2">Forgelite</text>
   <text x="294" y="218" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="30" fill="#d6d3d1">Same workflow as Superpowers. A fraction of the tokens.</text>
   <g font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" fill="#0f1117" font-weight="600">
     <rect x="294" y="248" width="110" height="36" rx="18" fill="#fbbf24"/><text x="349" y="272" text-anchor="middle">shape</text>

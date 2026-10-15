@@ -13,9 +13,9 @@ Goal: a spec the user has approved. No code until then.
 2. **Interview.** One question at a time. Prefer multiple choice, with your recommendation first. Cover purpose, who it is for, what "done" looks like, and what is out of scope. Stop when you could write the spec without guessing.
 3. **Propose 2-3 approaches** with trade-offs. Recommend one.
 4. **Suggest improvements.** List extra UX, polish, native-feel or performance ideas as an itemised list. The user accepts or rejects each. Only accepted ones enter the spec. Never add them silently. Record the accepted and rejected lists in the spec.
-5. **Write the spec** to `docs/forge/specs/YYYY-MM-DD-<topic>-design.md` (or the project's existing specs folder if `CLAUDE.md` or the repo already uses one). Sections: Goal, Out of scope, Decisions (with the reason), Improvements (accepted/rejected), Behaviour, Data/changes, Edge cases, Test approach. Concrete, no placeholders.
+5. **Write the spec** to `docs/forgelite/specs/YYYY-MM-DD-<topic>-design.md` (or the project's existing specs folder if `CLAUDE.md` or the repo already uses one). Sections: Goal, Out of scope, Decisions (with the reason), Improvements (accepted/rejected), Behaviour, Data/changes, Edge cases, Test approach. Concrete, no placeholders.
 6. **Cold review.** Dispatch a fresh subagent (`model: sonnet`) that has not seen the conversation. Give it the exact files to read, a limit of about 25 tool calls, and ask for a report under 400 words. It checks the spec against the code and `CLAUDE.md` and reports gaps, contradictions and hidden scope. It always checks the design-system doc, and the motion doc (with its checklist) whenever anything moves. Fold every real finding in. Reject findings only with a stated reason.
-7. **Show the user** a 5-line plain summary, what the review found and changed, the decisions he must make, and the spec path. Not the full spec. Get approval, then use `forge:planning`.
+7. **Show the user** a 5-line plain summary, what the review found and changed, the decisions he must make, and the spec path. Not the full spec. Get approval, then use `forgelite:planning`.
 
 ## Rules
 

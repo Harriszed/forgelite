@@ -1,7 +1,7 @@
 # RUN-REPORT
 
 ## 1. Workflow
-- Plugin/workflow used (Superpowers or Forge): Superpowers
+- Plugin/workflow used (Superpowers or Forgelite): Superpowers
 - Skills invoked, in order: using-superpowers (session start), brainstorming, writing-plans, executing-plans, test-driven-development, verification-before-completion, finishing-a-development-branch
 - Number of questions asked to the user: 0. Every question was answered from ANSWERS.md, as the task asked. Anything ANSWERS.md did not cover was decided as "simplest" and marked "builder's call" in the spec.
 - Did a cold review happen on the spec? Yes. A fresh general-purpose subagent (inherited session model, Claude Opus 5.5) found 5 issues: 3 open questions (export overwriting files, which characters tags may use, how strict the file-shape check is) and 2 errors (the list example broke the sort rule, and search was described two different ways). All 5 were settled in the spec.

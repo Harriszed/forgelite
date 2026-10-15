@@ -3,7 +3,7 @@
 Fill in honestly from what actually happened. Do not guess. Write "none" where it applies.
 
 ## 1. Workflow
-- Plugin/workflow used (Superpowers or Forge):
+- Plugin/workflow used (Superpowers or Forgelite):
 - Skills invoked, in order:
 - Number of questions asked to the user:
 - Did a cold review happen on the spec? (who/what model/findings count):

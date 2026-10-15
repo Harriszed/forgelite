@@ -1,8 +1,8 @@
 # RUN-REPORT
 
 ## 1. Workflow
-- Plugin/workflow used (Superpowers or Forge): Forge
-- Skills invoked, in order: forge:starting-work, forge:shaping, forge:planning, forge:building, forge:verifying
+- Plugin/workflow used (Superpowers or Forgelite): Forgelite
+- Skills invoked, in order: forgelite:starting-work, forgelite:shaping, forgelite:planning, forgelite:building, forgelite:verifying
 - Number of questions asked to the user: none (everything needed was in ANSWERS.md)
 - Did a cold review happen on the spec? (who/what model/findings count): yes, a fresh subagent (Sonnet, general-purpose), 20 findings (2 high-value gaps: damaged-file rules and `--out` overwriting tasks.json; it also confirmed the starter month bug is real and corrected my wording of its effect). All folded into the spec except #14 (my own "out of scope" additions, left as they are, harmless).
 - Did a cold review happen on the plan? (who/what model/findings count): yes, a fresh subagent (Opus, effort high), 18 findings (1 high: tag rule shared by two parallel tasks, so `src/validate.js` was added to task 1; the rest medium/low). All folded in except #14 (retry loop for a briefly locked file on Windows), rejected as not worth the extra code; reason is written in the plan.
