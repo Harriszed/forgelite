@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.2
+- Tasks are sized for about 40 tool calls per subagent; a subagent still going after about 40 hands over instead of continuing.
+
 ## 0.4.1
 - `building`: the final Opus review and `forgelite:verifying` run automatically; they are no longer offered as optional.
 

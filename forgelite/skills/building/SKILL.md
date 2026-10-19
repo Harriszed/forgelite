@@ -25,6 +25,7 @@ Building is best done on Sonnet (cheaper, and the plan already holds the thinkin
 
 - Independent tasks: dispatch one fresh subagent each (in parallel when files do not overlap). Give each the task text, the spec and plan paths, and the files it may touch. Do not paste the plan or pass conversation history.
 - Every subagent prompt ends with: "Reply in under 150 words: what changed, commit-ready file list, test result (pass/fail counts), anything blocked. No code, no pasted output." Long reports pile up in this chat and fill its context.
+- If a subagent is still going after about 40 tool calls, it is probably too big or stuck: have it stop and hand over (see below) instead of continuing.
 - Dependent tasks: run in order.
 - After each subagent returns, read its diff and test output yourself before moving on. A report is not proof.
 - If a task is blocked or the plan is wrong, stop and tell the user what is wrong and your recommended fix. Never quietly improvise around the plan.

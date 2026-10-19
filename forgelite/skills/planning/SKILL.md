@@ -12,7 +12,7 @@ Goal: a plan another agent could follow with no extra context.
 1. **Read** the approved spec and `CLAUDE.md`. No approved spec? Use `forgelite:shaping` first. If the spec has no record of accepted/rejected improvements, present that list (shaping step 4) now, before writing the plan.
 2. **Write the plan** to `docs/forgelite/plans/YYYY-MM-DD-<topic>.md` (or the project's existing plans folder):
    - Start with a 3-line summary and the spec path.
-   - Break work into small tasks, each doing one thing with an exact file list. Size each so one subagent can finish it well inside its context (roughly under 10 files); split anything bigger.
+   - Break work into small tasks, each doing one thing with an exact file list. Size each so one subagent can finish it in about 40 tool calls and well inside its context (roughly under 10 files, one concern); split anything bigger.
    - Each task has: the failing test to write first (or, if it cannot be unit-tested, the device check to add to the QA checklist), the change, the command that proves it, and a commit message.
    - Mark which tasks are independent (can run in parallel) and which depend on others.
    - No placeholders such as "add validation". Say what, where, and how.
