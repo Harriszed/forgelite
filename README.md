@@ -57,6 +57,32 @@ All three met every requirement, and all three found and fixed the planted bug.
 
 A larger real-world check: one 14-task feature in a React Native app (a database change, three server functions and four screens) was designed and planned on Opus, then built on Sonnet with 14 subagents. About three quarters of the total cost was Opus (the design chat and its reviews). The whole build phase cost less than the design phase alone. The plan review found 15 problems and the final review found 2 real bugs, all fixed before anything reached a device.
 
+## Latest testing
+
+Forgelite is under constant testing. I run it on a real app with the newest Claude models, read what it cost and where it slipped, and fix it in the next version. **Please always install the latest version** (`claude plugin update forgelite@forgelite`).
+
+**Latest test: version 0.4.2, one real feature, design and plan on Opus, build on Sonnet**
+
+A React Native app got two features in one go: a free limit on photo memories, and a daily quiz grown from 30 to about 400 questions with a "start a discussion" button (one database change, one seed script, 13 tasks).
+
+| Phase | Cost index | Notes |
+|---|---|---|
+| Design and plan (Opus) | 1.68M | Plan review found 9 real problems before any code was written |
+| Build and review (Sonnet main, 14 subagents) | 2.08M | 423 test suites, 9,468 tests passing, typecheck and lint clean |
+
+**What went well**
+- The final Opus review ran by itself and found 1 medium and 2 low bugs (one could have locked in a wrong quiz question for the day). All fixed.
+- `forgelite:verifying` ran at the end, as it should.
+- No build task went past about 49 tool calls (the previous test had 73).
+
+**What we found, and fixed in 0.4.3**
+- Three build tasks ran on Opus and cost about a third of the build. Now Sonnet by default; Opus only for migrations, security and payments, with the reason in the plan.
+- One task was built on Opus, then rebuilt on Sonnet. A failed task is now continued by the same agent, never rerun on another model.
+- Two tasks were merged into one subagent and went over the size target. Now one task per subagent.
+- The main build chat grew to over 250k tokens. It now hands over to a new session at about 150k.
+
+Numbers are a relative cost index, not a bill; see [Results](#results) for how it is calculated.
+
 ## Install
 
 ```bash
@@ -92,7 +118,7 @@ Forgelite starts itself: a tiny session-start hook (320 characters) tells Claude
 | Interview, spec, plan | Opus (your chat) | Mistakes here are the expensive ones. |
 | Spec review | Sonnet | A scoped read-and-report job. |
 | Plan review | Opus, high effort | The last gate before work starts. |
-| Build tasks | Sonnet (Haiku for pure mechanical edits, never tests) | The plan already holds the thinking. |
+| Build tasks | Sonnet (Haiku for pure mechanical edits, never tests). Opus only for migrations, security and payments, with the reason in the plan | The plan already holds the thinking. |
 | Final code review | Opus 5.5, high effort | The last gate before you see it. |
 
 A skill cannot change your chat's model, so when the plan is approved Forgelite tells you to **open a new Sonnet session** and say `build the plan at <path>`. This is deliberate: switching model mid-chat makes the new model re-read (and re-cache) the whole conversation at full price, and a builder does not need the design discussion anyway. The plan file is the handover.
@@ -102,7 +128,8 @@ A skill cannot change your chat's model, so when the plan is approved Forgelite 
 - Every reviewer gets an exact file list, a tool-call limit and a word limit, so it cannot wander through your repo.
 - Every build subagent must reply in under 150 words, so reports do not fill your main chat.
 - Subagents are meant to stay around 200-300k tokens of context. Tasks are sized to fit, and a subagent that is not nearly done writes a handover file for a fresh one.
-- Long build chats write a short progress note so a new session can continue from the plan.
+- One task per subagent, never merged, and a failed task is continued by the same agent, never rerun on another model.
+- The build chat hands over to a new session at about 150k tokens of context, with a short progress note.
 
 ## What Forgelite leaves out
 

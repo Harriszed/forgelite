@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.3
+- Build tasks default to Sonnet. Opus only for migrations, security and payments, with the reason written in the plan.
+- One task per subagent, never merged.
+- A failed task is never rerun on a different model; the same agent is continued.
+- The main build chat hands over to a new session at about 150k tokens of context.
+
 ## 0.4.2
 - Tasks are sized for about 40 tool calls per subagent; a subagent still going after about 40 hands over instead of continuing.
 

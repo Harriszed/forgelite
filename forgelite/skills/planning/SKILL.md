@@ -14,6 +14,7 @@ Goal: a plan another agent could follow with no extra context.
    - Start with a 3-line summary and the spec path.
    - Break work into small tasks, each doing one thing with an exact file list. Size each so one subagent can finish it in about 40 tool calls and well inside its context (roughly under 10 files, one concern); split anything bigger.
    - Each task has: the failing test to write first (or, if it cannot be unit-tested, the device check to add to the QA checklist), the change, the command that proves it, and a commit message.
+   - Builds default to Sonnet. Mark a task `opus` only if it is a database migration, security or payments work, and write the reason next to it.
    - Mark which tasks are independent (can run in parallel) and which depend on others.
    - No placeholders such as "add validation". Say what, where, and how.
 3. **Independent review.** Dispatch a fresh subagent, cold, scoped tightly (see Reviewer scope below), with `model: opus` and `effort` one level above this session's (`high` if unknown; stay at `max` if already there). It looks for: unstated assumptions, steps that cannot run in the stated order, contradictions with the spec, missing tests, scope that grew or shrank. It always checks the design-system doc, and the motion doc with its checklist whenever anything moves.

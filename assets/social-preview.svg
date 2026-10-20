@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="t d">
+  <title id="t">Forgelite</title>
+  <desc id="d">Forgelite: a lean, token-efficient build workflow for Claude Code. Same workflow as Superpowers, a fraction of the tokens.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#14161d"/>
+      <stop offset="1" stop-color="#1f1a17"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#c2410c"/>
+      <stop offset="0.55" stop-color="#eb6834"/>
+      <stop offset="1" stop-color="#fbbf24"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <g opacity="0.07" stroke="#ffffff" stroke-width="1">
+    <path d="M0 80H1280M0 160H1280M0 240H1280M0 320H1280M0 400H1280M0 480H1280M0 560H1280"/>
+    <path d="M160 0V640M320 0V640M480 0V640M640 0V640M800 0V640M960 0V640M1120 0V640"/>
+  </g>
+  <g transform="translate(190 290) scale(1.7)">
+    <rect x="-86" y="62" width="172" height="22" rx="4" fill="#3a3f4b"/>
+    <path d="M-72 62V34H-18C-8 34 0 26 0 14V6H72V34H52V62Z" fill="#4b5160"/>
+    <path d="M-72 34H-18C-8 34 0 26 0 14V6H-60C-70 6 -76 14 -72 34Z" fill="#5c6373"/>
+    <path d="M0 -92C14 -64 40 -52 36 -22C34 -4 18 4 0 4C-18 4 -34 -6 -34 -24C-34 -40 -20 -46 -14 -62C-6 -52 -2 -70 0 -92Z" fill="url(#flame)"/>
+    <path d="M0 -42C8 -28 20 -24 18 -10C17 -2 9 3 0 3C-9 3 -17 -3 -17 -12C-17 -22 -8 -26 0 -42Z" fill="#fde68a" opacity="0.9"/>
+  </g>
+  <g font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="410" y="270" font-size="150" font-weight="700" fill="#f5f5f4" letter-spacing="-3">Forgelite</text>
+    <text x="416" y="352" font-size="28" fill="#d6d3d1">Same workflow as Superpowers. A fraction of the tokens.</text>
+    <g font-size="22" font-weight="600" fill="#0f1117">
+      <rect x="416" y="384" width="116" height="42" rx="21" fill="#fbbf24"/><text x="474" y="412" text-anchor="middle">shape</text>
+      <rect x="544" y="384" width="104" height="42" rx="21" fill="#fb923c"/><text x="596" y="412" text-anchor="middle">plan</text>
+      <rect x="660" y="384" width="108" height="42" rx="21" fill="#eb6834"/><text x="714" y="412" text-anchor="middle">build</text>
+      <rect x="780" y="384" width="116" height="42" rx="21" fill="#c2410c"/><text x="838" y="412" text-anchor="middle" fill="#ffffff">debug</text>
+      <rect x="908" y="384" width="120" height="42" rx="21" fill="#9a3412"/><text x="968" y="412" text-anchor="middle" fill="#ffffff">verify</text>
+    </g>
+    <g>
+      <rect x="80" y="476" width="340" height="104" rx="14" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="108" y="530" font-size="48" font-weight="700" fill="#fbbf24">5%</text>
+      <text x="108" y="560" font-size="17" fill="#d6d3d1">of Superpowers' instruction size</text>
+      <rect x="470" y="476" width="340" height="104" rx="14" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="498" y="530" font-size="48" font-weight="700" fill="#fbbf24">-42%</text>
+      <text x="498" y="560" font-size="17" fill="#d6d3d1">cost with a Sonnet build chat</text>
+      <rect x="860" y="476" width="340" height="104" rx="14" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="888" y="528" font-size="40" font-weight="700" fill="#fbbf24">Opus + Sonnet</text>
+      <text x="888" y="560" font-size="17" fill="#d6d3d1">design on Opus, build on Sonnet</text>
+    </g>
+  </g>
+</svg>
