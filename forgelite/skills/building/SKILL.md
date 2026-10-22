@@ -18,8 +18,8 @@ Building is best done on Sonnet (cheaper, and the plan already holds the thinkin
 0. If the task touches UI or motion, re-read the relevant design-system or motion-doc section first, if the project has one.
 1. **Test first.** Write the failing test. Run it. Confirm it fails for the right reason. If it cannot be unit-tested, say so and add a device check to the QA checklist instead.
 2. **Implement** the smallest change that passes. Nothing beyond the task.
-3. **Run** the task's proving command plus the related tests. Read the output.
-4. **Commit** with the planned message. One task, one commit. Stage only this task's files by name, never `git add -A` or `git add .` (parallel subagents share the working tree). No AI co-author lines.
+3. **Run** the task's proving command plus the related tests. Read the output. When tasks run in parallel, each runs only its own tests, never the full suite (parallel runs can clash over shared files, ports or databases).
+4. **Commit** with the planned message. One task, one commit. Stage only this task's files by name, never `git add -A` or `git add .` (parallel subagents share the working tree). Never stage `docs/forgelite/handovers/`. No AI co-author lines unless `CLAUDE.md` asks for them.
 
 ## Running the plan
 
@@ -27,6 +27,7 @@ Building is best done on Sonnet (cheaper, and the plan already holds the thinkin
 - Every subagent prompt ends with: "Reply in under 150 words: what changed, commit-ready file list, test result (pass/fail counts), anything blocked. No code, no pasted output." Long reports pile up in this chat and fill its context.
 - If a subagent is still going after about 40 tool calls, it is probably too big or stuck: have it stop and hand over (see below) instead of continuing.
 - Dependent tasks: run in order.
+- After each parallel group finishes, run the full test suite once yourself before starting the next group.
 - After each subagent returns, read its diff and test output yourself before moving on. A report is not proof.
 - If a task is blocked or the plan is wrong, stop and tell the user what is wrong and your recommended fix. Never quietly improvise around the plan.
 - If a bug appears, switch to `forgelite:debugging`.
@@ -64,7 +65,7 @@ When all tasks are done, run these two steps without asking the user whether to:
 - Crashes or stack traces shown to the user, and anything that could hang or freeze.
 - Spec requirements with no test.
 
-Add a test for each real finding. If a limit is needed that the spec did not set, pick a sensible one, record it, and tell the user. Fold in real findings, then invoke the `forgelite:verifying` skill with the Skill tool (do not just run checks inline).
+Add a test for each real finding. If a limit is needed that the spec did not set, pick a sensible one, record it, and tell the user. Fold in real findings, then invoke the `forgelite:verifying` skill with the Skill tool (do not just run checks inline). Once verifying passes, delete `docs/forgelite/handovers/`: handover and progress notes are working files, never committed.
 
 ## Rules
 
