@@ -6,8 +6,8 @@
   <text x="32" y="66" font-size="13" fill="#6b7280">Forgelite as a share of Superpowers 7.0.0 (Superpowers = 100%).</text>
   <g font-size="14" fill="#374151">
     <text x="32" y="124">Skills</text><text x="32" y="142" font-size="12" fill="#6b7280">6 vs 15</text>
-    <text x="32" y="188">Instruction lines</text><text x="32" y="206" font-size="12" fill="#6b7280">199 vs 3,828</text>
-    <text x="32" y="252">Session-start text</text><text x="32" y="270" font-size="12" fill="#6b7280">320 vs ~3,200 chars</text>
+    <text x="32" y="188">Instruction lines</text><text x="32" y="206" font-size="12" fill="#6b7280">202 vs 3,828</text>
+    <text x="32" y="252">Session-start text</text><text x="32" y="270" font-size="12" fill="#6b7280">336 vs ~3,200 chars</text>
   </g>
   <g fill="#e5e7eb">
     <rect x="190" y="104" width="520" height="40" rx="6"/>

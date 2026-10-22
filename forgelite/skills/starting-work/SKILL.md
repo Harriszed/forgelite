@@ -22,4 +22,4 @@ description: Reads the project's CLAUDE.md and picks the right Forgelite step. U
 
 - Plain words, short answers. Ask only decisions, never code questions. Lead with the recommendation.
 - Work on a feature branch, never `master`/`main`. Never merge or push to it; `CLAUDE.md` gates that.
-- No AI co-author or "Generated with" lines in commits or PRs.
+- No AI co-author or "Generated with" lines in commits or PRs, unless `CLAUDE.md` asks for them.
