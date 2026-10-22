@@ -79,7 +79,7 @@ A mobile app got two new features in one go (one database change, one data-loadi
 - Three build tasks ran on Opus and cost about a third of the build. Now Sonnet by default; Opus only for migrations, security and payments, with the reason in the plan.
 - One task was built on Opus, then rebuilt on Sonnet. A failed task is now continued by the same agent, never rerun on another model.
 - Two tasks were merged into one subagent and went over the size target. Now one task per subagent.
-- The main build chat grew to over 250k tokens. It now hands over to a new session at about 150k.
+- The main build chat grew to over 250k tokens. It now works in batches (see 0.4.4 below).
 
 Numbers are a relative cost index, not a bill; see [Results](#results) for how it is calculated.
 
@@ -87,7 +87,7 @@ Numbers are a relative cost index, not a bill; see [Results](#results) for how i
 
 Total cost index 9.3M (design 3.9M, build 5.4M), about 0.49M per task against 0.29M in the first test.
 
-- **Went well:** Opus ran only the database task and the final review. The plan review found 12 problems. The final review found 5 real bugs (including repeating animations that ran several times too fast). 9,756 tests passing.
+- **Went well:** Opus ran only the database task and the final review. The plan review found 12 problems. The final review found 5 real bugs (including a timing bug that made something run several times too fast). 9,756 tests passing.
 - **Found, fixed in 0.4.4:** the build chat grew to 418k tokens and cost the most of any part (now batches of 8 tasks); 8 of 19 tasks were too big and needed a second agent (the plan reviewer now checks task size); two parallel agents overwrote each other's files (tasks that share a file now run in sequence); a timed loop kept waking the huge chat (no `/loop` during builds).
 
 ## Install
