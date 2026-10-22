@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0
+- New `forgelite:worktrees`: isolated git worktree with dependencies installed and a clean test baseline; git-ignored folder checked first.
+- New `forgelite:requesting-review`: one cold Opus review with a fixed brief (awkward input, silent wrong answers, security), a tool-call limit and a ranked report. `building` now uses it for the final review.
+- New `forgelite:receiving-review`: each finding checked against the code before acting; real ones fixed test-first, wrong ones answered with evidence, design questions go to the user.
+- New `forgelite:finishing`: after verifying, the user chooses PR, local merge, keep or discard; then the worktree is cleaned up. `building` ends with it.
+- Merging or pushing to the default branch is allowed only through `finishing`, when the user picks it and `CLAUDE.md` allows it.
+
 ## 0.4.5
 - AI co-author lines stay off by default, but the project's `CLAUDE.md` can ask for them.
 - Parallel build tasks run only their own tests; the full suite runs once after each parallel group.

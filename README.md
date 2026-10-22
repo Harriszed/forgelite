@@ -5,8 +5,8 @@
 <p align="center">
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-eb6834"></a>
   <img alt="Claude Code plugin" src="https://img.shields.io/badge/Claude%20Code-plugin-c2410c">
-  <img alt="6 skills" src="https://img.shields.io/badge/skills-6-fbbf24">
-  <img alt="202 lines" src="https://img.shields.io/badge/instructions-202%20lines-9a3412">
+  <img alt="10 skills" src="https://img.shields.io/badge/skills-10-fbbf24">
+  <img alt="291 lines" src="https://img.shields.io/badge/instructions-291%20lines-9a3412">
 </p>
 
 # Forgelite
@@ -23,8 +23,8 @@ Forgelite is built on the ideas of [**Superpowers**](https://github.com/obra/sup
 
 |  | Superpowers 7.0.0 | Forgelite |
 |---|---|---|
-| Skills | 15 | **6** |
-| Instruction lines | 3,828 | **202** |
+| Skills | 15 | **10** |
+| Instruction lines | 3,828 | **291** |
 | Text injected at every session start | ~3,200 chars | **336 chars** |
 | Independent reviews (spec, plan, final code) | yes | yes |
 | Test-first building | yes | yes |
@@ -32,7 +32,7 @@ Forgelite is built on the ideas of [**Superpowers**](https://github.com/obra/sup
 | Opus for design and reviews, Sonnet for building | not built in | **built in** |
 | Plain-language summaries aimed at non-coders | not a focus | **yes** |
 
-<p align="center"><img src="assets/size-chart.svg" alt="Forgelite is 5% of the instruction lines of Superpowers" width="720"></p>
+<p align="center"><img src="assets/size-chart.svg" alt="Forgelite is 8% of the instruction lines of Superpowers" width="720"></p>
 
 ## Results
 
@@ -117,6 +117,10 @@ Forgelite starts itself: a tiny session-start hook (336 characters) tells Claude
 | `forgelite:building` | Builds test-first, runs independent tasks as parallel subagents on the cheapest model that can do the job, then a final Opus review that runs the code with awkward input. |
 | `forgelite:debugging` | Reproduce, gather evidence, one hypothesis at a time, failing test, fix the cause. Stops after three failed fixes. |
 | `forgelite:verifying` | No "done" without real command output from this session. Ends with exactly what you should check next. |
+| `forgelite:worktrees` | Sets up an isolated git worktree with dependencies installed and a clean test baseline, when your checkout should stay untouched. |
+| `forgelite:requesting-review` | One cold Opus review of the branch diff against the spec and plan, with a fixed brief, tool-call limit and ranked report. |
+| `forgelite:receiving-review` | Checks every finding against the code before changing anything: fixes real ones test-first, pushes back on wrong ones with evidence. |
+| `forgelite:finishing` | After verifying passes, you choose: open a PR, merge locally, keep the branch or discard it. Then it cleans up the worktree. |
 
 ### Model strategy
 
@@ -140,7 +144,7 @@ A skill cannot change your chat's model, so when the plan is approved Forgelite 
 
 ## What Forgelite leaves out
 
-To stay small, Forgelite does **not** include Superpowers' git-worktree skill, finish-branch skill, parallel-agent dispatch skill, or separate code-review request and receive skills. Parallel subagents and a final cold review are built into `forgelite:building` instead. If you rely on those skills, keep Superpowers for them.
+Forgelite now has its own worktree, finish-branch and code-review (request and receive) skills, written short. It still does **not** include Superpowers' parallel-agent dispatch skill, its skill-writing skill or its other meta skills: parallel subagents are built into `forgelite:building` instead. If you rely on those, keep Superpowers for them.
 
 ## Works with your project
 
