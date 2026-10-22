@@ -9,7 +9,7 @@ Goal: the plan, implemented, tested, committed in small steps.
 
 ## Before starting
 
-Confirm you are on a feature branch, never `master`/`main`. Create one if not.
+Confirm you are on a feature branch, never `master`/`main`. Create one if not. If the checkout has unrelated uncommitted work, or the user wants their checkout left alone, use `forgelite:worktrees` first.
 
 Building is best done on Sonnet (cheaper, and the plan already holds the thinking). If this session is running on Opus, say once: "Design is done. To save tokens, open a new Sonnet session and say: build the plan at <plan path>. (Switching model in this chat would re-cache everything.)" Then continue only if the user says to carry on here.
 
@@ -57,15 +57,11 @@ When a subagent hands over, read the handover file, then continue the same agent
 
 ## Finishing
 
-When all tasks are done, run these two steps without asking the user whether to: they are required, not optional. First dispatch one cold reviewer (always Opus: `model: opus`, `effort: high`; never a cheaper model) on the full diff against the spec and plan. Give it the diff command, the spec and plan paths and a limit of about 40 tool calls; it reports in under 500 words. Tell it to look for correctness bugs first, then actually run the code with awkward input before reporting:
-- Huge, tiny, zero, negative, empty, missing and repeated values.
-- Wrong types or formats, and values that look like flags or options.
-- Unclear or misleading error messages: each must name what is wrong and what is expected.
-- Silent wrong answers (rounding, overflow, lost data), which are worse than crashes.
-- Crashes or stack traces shown to the user, and anything that could hang or freeze.
-- Spec requirements with no test.
-
-Add a test for each real finding. If a limit is needed that the spec did not set, pick a sensible one, record it, and tell the user. Fold in real findings, then invoke the `forgelite:verifying` skill with the Skill tool (do not just run checks inline). Once verifying passes, delete `docs/forgelite/handovers/`: handover and progress notes are working files, never committed.
+When all tasks are done, run these steps in order without asking whether to: they are required, not optional.
+1. Invoke `forgelite:requesting-review` (always Opus at high effort) on the full branch diff against the spec and plan.
+2. Invoke `forgelite:receiving-review` on its report, adding a test for each real finding.
+3. Invoke `forgelite:verifying` with the Skill tool (do not just run checks inline). Once it passes, delete `docs/forgelite/handovers/`: handover and progress notes are working files, never committed.
+4. Invoke `forgelite:finishing` so the user chooses where the branch goes.
 
 ## Rules
 

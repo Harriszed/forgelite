@@ -1,6 +1,6 @@
 {
   "name": "forgelite",
-  "version": "0.4.5",
+  "version": "0.5.0",
   "description": "A lean, token-efficient build workflow: shape an idea into a spec, plan it, build it test-first, debug by evidence, verify before claiming done. Reads the project's CLAUDE.md first and never overrides it.",
   "author": {
     "name": "Harriszed"

@@ -22,4 +22,4 @@ Goal: no claim without evidence from this session.
 - Never write "should work", "probably fixed" or "done" without a command's output to back it.
 - A failing check is reported with its output, not worked around.
 - Anything you could not run is listed as not verified.
-- Never merge or push to `master`/`main`; `CLAUDE.md` gates that.
+- Never merge or push to `master`/`main` here; that is `forgelite:finishing`'s job, and `CLAUDE.md` gates it.
