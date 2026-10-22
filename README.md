@@ -61,7 +61,7 @@ A larger real-world check: one 14-task feature in a mobile app (a database chang
 
 Forgelite is under constant testing. I run it on a real app with the newest Claude models, read what it cost and where it slipped, and fix it in the next version. **Please always install the latest version** (`claude plugin update forgelite@forgelite`).
 
-**Latest test: version 0.4.2, one real feature, design and plan on Opus, build on Sonnet**
+**Test 1: version 0.4.2, one real feature, design and plan on Opus, build on Sonnet**
 
 A mobile app got two new features in one go (one database change, one data-loading script, 13 tasks).
 
@@ -89,6 +89,13 @@ Total cost index 9.3M (design 3.9M, build 5.4M), about 0.49M per task against 0.
 
 - **Went well:** Opus ran only the database task and the final review. The plan review found 12 problems. The final review found 5 real bugs (including a timing bug that made something run several times too fast). 9,756 tests passing.
 - **Found, fixed in 0.4.4:** the build chat grew to 418k tokens and cost the most of any part (now batches of 8 tasks); 8 of 19 tasks were too big and needed a second agent (the plan reviewer now checks task size); two parallel agents overwrote each other's files (tasks that share a file now run in sequence); a timed loop kept waking the huge chat (no `/loop` during builds).
+
+**Test 3 (latest): version 0.5.0, a fix round on an existing feature in a mobile app (about 16 tasks)**
+
+Total cost index 4.4M (design and plan 2.3M, build in two batches 0.8M and 1.3M), about 0.3M per task against 0.49M in test 2.
+
+- **Went well:** the 8-task batches worked. The two build chats stayed at 132k and 168k tokens (test 2 reached 418k), and the main build chat cost fell from 1.6M to 0.26M. Every task ran on Sonnet, the biggest took 28 tool calls, none needed a second agent, and tasks that shared files ran one after another with no clashes. The plan review found 16 problems and the final review found 6, all fixed. 9,881 tests passing.
+- **Found, fixed in 0.5.1:** the design chat became the biggest cost (65 calls on Opus, 241k tokens, 1.6M). Once the spec is approved, planning now moves to a fresh Opus session, after checking every decision is written in the spec.
 
 ## Install
 

@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.1
+- `shaping`: once the spec is approved, planning moves to a fresh Opus session (after checking every decision is written in the spec). A long design chat is no longer carried through planning.
+
 ## 0.5.0
 - New `forgelite:worktrees`: isolated git worktree with dependencies installed and a clean test baseline; git-ignored folder checked first.
 - New `forgelite:requesting-review`: one cold Opus review with a fixed brief (awkward input, silent wrong answers, security), a tool-call limit and a ranked report. `building` now uses it for the final review.
