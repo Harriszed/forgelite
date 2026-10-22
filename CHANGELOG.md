@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.4
+- Builds run in batches of at most 8 tasks (fewer after big outputs); then a progress note and a fresh session. Final review and verifying still run in full after the last task.
+- The plan reviewer flags tasks over about 8 files or more than one concern, and parallel tasks that share a file.
+- Tasks that share a file run in sequence, never in parallel.
+- No `/loop` during builds.
+
 ## 0.4.3
 - Build tasks default to Sonnet. Opus only for migrations, security and payments, with the reason written in the plan.
 - One task per subagent, never merged.

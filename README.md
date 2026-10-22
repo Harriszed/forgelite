@@ -83,6 +83,13 @@ A React Native app got two features in one go: a free limit on photo memories, a
 
 Numbers are a relative cost index, not a bill; see [Results](#results) for how it is calculated.
 
+**Test 2: version 0.4.3, a bigger feature (19 tasks: countdowns, 11 animated scenes, a "thinking of you" button)**
+
+Total cost index 9.3M (design 3.9M, build 5.4M), about 0.49M per task against 0.29M in the first test.
+
+- **Went well:** Opus ran only the database task and the final review. The plan review found 12 problems. The final review found 5 real bugs (every scene's repeating animation ran 3-7x too fast). 9,756 tests passing.
+- **Found, fixed in 0.4.4:** the build chat grew to 418k tokens and cost the most of any part (now batches of 8 tasks); 8 of 19 tasks were too big and needed a second agent (the plan reviewer now checks task size); two parallel agents overwrote each other's files (tasks that share a file now run in sequence); a timed loop kept waking the huge chat (no `/loop` during builds).
+
 ## Install
 
 ```bash
@@ -129,7 +136,7 @@ A skill cannot change your chat's model, so when the plan is approved Forgelite 
 - Every build subagent must reply in under 150 words, so reports do not fill your main chat.
 - Subagents are meant to stay around 200-300k tokens of context. Tasks are sized to fit, and a subagent that is not nearly done writes a handover file for a fresh one.
 - One task per subagent, never merged, and a failed task is continued by the same agent, never rerun on another model.
-- The build chat hands over to a new session at about 150k tokens of context, with a short progress note.
+- Builds run in batches of at most 8 tasks, then a progress note and a fresh session, so the chat never grows huge. Tasks that share a file never run in parallel.
 
 ## What Forgelite leaves out
 

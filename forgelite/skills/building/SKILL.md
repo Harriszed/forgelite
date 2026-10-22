@@ -23,14 +23,14 @@ Building is best done on Sonnet (cheaper, and the plan already holds the thinkin
 
 ## Running the plan
 
-- Independent tasks: dispatch one fresh subagent per task, never merging two tasks into one (in parallel when files do not overlap). Give each the task text, the spec and plan paths, and the files it may touch. Do not paste the plan or pass conversation history.
+- Independent tasks: dispatch one fresh subagent per task, never merging two tasks into one (in parallel only when their file lists do not overlap at all; tasks that share any file run one after another). Give each the task text, the spec and plan paths, and the files it may touch. Do not paste the plan or pass conversation history.
 - Every subagent prompt ends with: "Reply in under 150 words: what changed, commit-ready file list, test result (pass/fail counts), anything blocked. No code, no pasted output." Long reports pile up in this chat and fill its context.
 - If a subagent is still going after about 40 tool calls, it is probably too big or stuck: have it stop and hand over (see below) instead of continuing.
 - Dependent tasks: run in order.
 - After each subagent returns, read its diff and test output yourself before moving on. A report is not proof.
 - If a task is blocked or the plan is wrong, stop and tell the user what is wrong and your recommended fix. Never quietly improvise around the plan.
 - If a bug appears, switch to `forgelite:debugging`.
-- When this chat reaches about 150k tokens of context (check `/context`; or many tasks done and big outputs), stop. Write a short progress note to `docs/forgelite/handovers/progress.md` (tasks done with commits, tasks left, decisions), then tell the user to open a new Sonnet session and say: "continue the plan at <plan path>; progress note at <note path>".
+- Work in batches of at most 8 tasks per chat, or fewer if the chat has had a lot of big outputs (long diffs, test logs, big files). A fresh session reloads the project context once, which is cheaper than carrying a growing chat. At the end of a batch, finish and commit the current task, write `docs/forgelite/handovers/progress.md` (tasks done with commits, tasks left, decisions, anything surprising), then tell the user to open a new Sonnet session and say: "continue the plan at <plan path>; progress note at <note path>". The final review and `forgelite:verifying` run only after the LAST task, always in full. Do not use `/loop` or timed wake-ups during a build.
 
 ## Model choice (save tokens)
 
