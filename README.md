@@ -55,7 +55,7 @@ All three met every requirement, and all three found and fixed the planted bug.
 - Costs are a **relative index** (output tokens x5, cache writes x1.25, cache reads x0.1), not a bill. Sonnet is priced at 1/5 of Opus, which is an assumption. At 1/3 the Sonnet run saves about 23% instead of 42%. Run `benchmark/scripts/token_report.py` with your own price.
 - One run per row, one small project, Windows only. Treat the numbers as a rough size of the effect, not a precise benchmark. The full reports are in [`benchmark/reports`](benchmark/reports) and the method is in [`benchmark`](benchmark).
 
-A larger real-world check: one 14-task feature in a React Native app (a database change, three server functions and four screens) was designed and planned on Opus, then built on Sonnet with 14 subagents. About three quarters of the total cost was Opus (the design chat and its reviews). The whole build phase cost less than the design phase alone. The plan review found 15 problems and the final review found 2 real bugs, all fixed before anything reached a device.
+A larger real-world check: one 14-task feature in a mobile app (a database change, three server functions and four screens) was designed and planned on Opus, then built on Sonnet with 14 subagents. About three quarters of the total cost was Opus (the design chat and its reviews). The whole build phase cost less than the design phase alone. The plan review found 15 problems and the final review found 2 real bugs, all fixed before anything reached a device.
 
 ## Latest testing
 
@@ -63,7 +63,7 @@ Forgelite is under constant testing. I run it on a real app with the newest Clau
 
 **Latest test: version 0.4.2, one real feature, design and plan on Opus, build on Sonnet**
 
-A React Native app got two features in one go: a free limit on photo memories, and a daily quiz grown from 30 to about 400 questions with a "start a discussion" button (one database change, one seed script, 13 tasks).
+A mobile app got two new features in one go (one database change, one data-loading script, 13 tasks).
 
 | Phase | Cost index | Notes |
 |---|---|---|
@@ -71,7 +71,7 @@ A React Native app got two features in one go: a free limit on photo memories, a
 | Build and review (Sonnet main, 14 subagents) | 2.08M | 423 test suites, 9,468 tests passing, typecheck and lint clean |
 
 **What went well**
-- The final Opus review ran by itself and found 1 medium and 2 low bugs (one could have locked in a wrong quiz question for the day). All fixed.
+- The final Opus review ran by itself and found 1 medium and 2 low bugs (one could have saved a wrong value for the day). All fixed.
 - `forgelite:verifying` ran at the end, as it should.
 - No build task went past about 49 tool calls (the previous test had 73).
 
@@ -83,11 +83,11 @@ A React Native app got two features in one go: a free limit on photo memories, a
 
 Numbers are a relative cost index, not a bill; see [Results](#results) for how it is calculated.
 
-**Test 2: version 0.4.3, a bigger feature (19 tasks: countdowns, 11 animated scenes, a "thinking of you" button)**
+**Test 2: version 0.4.3, a bigger new feature in a mobile app (19 tasks)**
 
 Total cost index 9.3M (design 3.9M, build 5.4M), about 0.49M per task against 0.29M in the first test.
 
-- **Went well:** Opus ran only the database task and the final review. The plan review found 12 problems. The final review found 5 real bugs (every scene's repeating animation ran 3-7x too fast). 9,756 tests passing.
+- **Went well:** Opus ran only the database task and the final review. The plan review found 12 problems. The final review found 5 real bugs (including repeating animations that ran several times too fast). 9,756 tests passing.
 - **Found, fixed in 0.4.4:** the build chat grew to 418k tokens and cost the most of any part (now batches of 8 tasks); 8 of 19 tasks were too big and needed a second agent (the plan reviewer now checks task size); two parallel agents overwrote each other's files (tasks that share a file now run in sequence); a timed loop kept waking the huge chat (no `/loop` during builds).
 
 ## Install
