@@ -9,7 +9,7 @@ Usage:
 Cost index (a rough, relative number, not a bill):
     input + 5 x output + 1.25 x cache writes + 0.1 x cache reads
 then multiplied by --sonnet-price for Sonnet models (default 0.2 = Sonnet tokens cost a fifth of Opus tokens;
-this is an assumption, so pass your own).
+this is an assumption, so pass your own), and by --haiku-price for Haiku models (default 0.08).
 """
 import argparse
 import collections
@@ -25,13 +25,17 @@ args = ap.parse_args()
 
 root = os.path.expanduser("~/.claude/projects")
 files = [f for d in glob.glob(os.path.join(root, args.pattern)) for f in glob.glob(d + "/**/*.jsonl", recursive=True)]
+if not files:
+    raise SystemExit(f"No transcripts match {args.pattern!r} under {root}")
 
 seen = set()
 by = collections.defaultdict(collections.Counter)
 calls = 0
 for f in files:
     is_sub = "subagents" in f.replace("\\", "/")
-    for line in open(f, encoding="utf-8", errors="replace"):
+    with open(f, encoding="utf-8", errors="replace") as fh:
+        lines = fh.readlines()
+    for line in lines:
         try:
             d = json.loads(line)
         except ValueError:

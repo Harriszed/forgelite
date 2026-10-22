@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+- Build tasks stage only their own files by name (never `git add -A`), so parallel subagents cannot commit each other's work.
+- Design-system, motion-doc, QA-checklist and rebuild steps apply only when the project has them (no more React Native-specific wording).
+- Gender-neutral wording; final review says "Opus" rather than a pinned version.
+- `token_report.py` exits with a clear message when no transcripts match, and documents `--haiku-price`.
+- README: corrected instruction lines (201) and session-start text size (336 chars).
+
 ## 0.4.4
 - Builds run in batches of at most 8 tasks (fewer after big outputs); then a progress note and a fresh session. Final review and verifying still run in full after the last task.
 - The plan reviewer flags tasks over about 8 files or more than one concern, and parallel tasks that share a file.

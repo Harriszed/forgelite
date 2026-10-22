@@ -15,7 +15,7 @@ Goal: no claim without evidence from this session.
    - What passed, with the numbers (e.g. "212 tests, 0 failed").
    - What failed or was skipped, and why.
    - What the user must check on a device or in the app.
-   - Exactly what to do next: the run command (rebuild or Metro-only, and why) and the QA checklist path.
+   - Exactly what to do next: the run command (and whether a full rebuild is needed, and why) and the QA checklist path, if there is one.
 
 ## Rules
 

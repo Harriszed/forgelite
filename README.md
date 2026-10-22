@@ -6,7 +6,7 @@
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-eb6834"></a>
   <img alt="Claude Code plugin" src="https://img.shields.io/badge/Claude%20Code-plugin-c2410c">
   <img alt="6 skills" src="https://img.shields.io/badge/skills-6-fbbf24">
-  <img alt="199 lines" src="https://img.shields.io/badge/instructions-199%20lines-9a3412">
+  <img alt="201 lines" src="https://img.shields.io/badge/instructions-201%20lines-9a3412">
 </p>
 
 # Forgelite
@@ -24,8 +24,8 @@ Forgelite is built on the ideas of [**Superpowers**](https://github.com/obra/sup
 |  | Superpowers 7.0.0 | Forgelite |
 |---|---|---|
 | Skills | 15 | **6** |
-| Instruction lines | 3,828 | **199** |
-| Text injected at every session start | ~3,200 chars | **320 chars** |
+| Instruction lines | 3,828 | **201** |
+| Text injected at every session start | ~3,200 chars | **336 chars** |
 | Independent reviews (spec, plan, final code) | yes | yes |
 | Test-first building | yes | yes |
 | Model chosen per subagent | mostly inherits your chat's model | **yes** (Haiku, Sonnet or Opus by job) |
@@ -103,7 +103,7 @@ Restart Claude Code. If you have Superpowers installed, **disable it** while you
 claude plugin disable superpowers@superpowers-dev
 ```
 
-Forgelite starts itself: a tiny session-start hook (320 characters) tells Claude to use `forgelite:starting-work` before any task that adds, changes or fixes code. Quick questions and one-line fixes are skipped.
+Forgelite starts itself: a tiny session-start hook (336 characters) tells Claude to use `forgelite:starting-work` before any task that adds, changes or fixes code. Quick questions and one-line fixes are skipped.
 
 ## How it works
 
@@ -126,7 +126,7 @@ Forgelite starts itself: a tiny session-start hook (320 characters) tells Claude
 | Spec review | Sonnet | A scoped read-and-report job. |
 | Plan review | Opus, high effort | The last gate before work starts. |
 | Build tasks | Sonnet (Haiku for pure mechanical edits, never tests). Opus only for migrations, security and payments, with the reason in the plan | The plan already holds the thinking. |
-| Final code review | Opus 5.5, high effort | The last gate before you see it. |
+| Final code review | Opus, high effort | The last gate before you see it. |
 
 A skill cannot change your chat's model, so when the plan is approved Forgelite tells you to **open a new Sonnet session** and say `build the plan at <path>`. This is deliberate: switching model mid-chat makes the new model re-read (and re-cache) the whole conversation at full price, and a builder does not need the design discussion anyway. The plan file is the handover.
 

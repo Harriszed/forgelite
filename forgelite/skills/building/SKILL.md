@@ -15,11 +15,11 @@ Building is best done on Sonnet (cheaper, and the plan already holds the thinkin
 
 ## Per task
 
-0. If the task touches UI or motion, re-read the relevant design-system or motion-doc section first.
+0. If the task touches UI or motion, re-read the relevant design-system or motion-doc section first, if the project has one.
 1. **Test first.** Write the failing test. Run it. Confirm it fails for the right reason. If it cannot be unit-tested, say so and add a device check to the QA checklist instead.
 2. **Implement** the smallest change that passes. Nothing beyond the task.
 3. **Run** the task's proving command plus the related tests. Read the output.
-4. **Commit** with the planned message. One task, one commit. No AI co-author lines.
+4. **Commit** with the planned message. One task, one commit. Stage only this task's files by name, never `git add -A` or `git add .` (parallel subagents share the working tree). No AI co-author lines.
 
 ## Running the plan
 
@@ -56,7 +56,7 @@ When a subagent hands over, read the handover file, then continue the same agent
 
 ## Finishing
 
-When all tasks are done, run these two steps without asking the user whether to: they are required, not optional. First dispatch one cold reviewer (always Opus 5.5: `model: opus`, `effort: high`; never a cheaper model) on the full diff against the spec and plan. Give it the diff command, the spec and plan paths and a limit of about 40 tool calls; it reports in under 500 words. Tell it to look for correctness bugs first, then actually run the code with awkward input before reporting:
+When all tasks are done, run these two steps without asking the user whether to: they are required, not optional. First dispatch one cold reviewer (always Opus: `model: opus`, `effort: high`; never a cheaper model) on the full diff against the spec and plan. Give it the diff command, the spec and plan paths and a limit of about 40 tool calls; it reports in under 500 words. Tell it to look for correctness bugs first, then actually run the code with awkward input before reporting:
 - Huge, tiny, zero, negative, empty, missing and repeated values.
 - Wrong types or formats, and values that look like flags or options.
 - Unclear or misleading error messages: each must name what is wrong and what is expected.
