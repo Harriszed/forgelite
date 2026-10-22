@@ -36,7 +36,7 @@
     </g>
     <g>
       <rect x="80" y="476" width="340" height="104" rx="14" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.12"/>
-      <text x="108" y="530" font-size="48" font-weight="700" fill="#fbbf24">5%</text>
+      <text x="108" y="530" font-size="48" font-weight="700" fill="#fbbf24">8%</text>
       <text x="108" y="560" font-size="17" fill="#d6d3d1">of Superpowers' instruction size</text>
       <rect x="470" y="476" width="340" height="104" rx="14" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.12"/>
       <text x="498" y="530" font-size="48" font-weight="700" fill="#fbbf24">-42%</text>

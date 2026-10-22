@@ -114,7 +114,7 @@ Forgelite starts itself: a tiny session-start hook (336 characters) tells Claude
 
 ## How it works
 
-<p align="center"><img src="assets/workflow.svg" alt="Forgelite workflow: shape and plan on Opus, build and verify on Sonnet" width="760"></p>
+<p align="center"><img src="assets/workflow.svg" alt="Forgelite workflow: shape and plan in separate Opus chats, build on Sonnet in batches of 8 tasks, then an Opus review, verify and finish" width="760"></p>
 
 | Skill | What it does |
 |---|---|
