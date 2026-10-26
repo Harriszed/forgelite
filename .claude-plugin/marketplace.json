@@ -7,7 +7,7 @@
       "name": "forgelite",
       "source": "./forgelite",
       "description": "Shape, plan, build, debug and verify with cheaper models where it is safe and Opus where it matters. A lean alternative to Superpowers.",
-      "version": "0.5.1",
+      "version": "0.5.2",
       "license": "MIT",
       "keywords": ["workflow", "tdd", "planning", "subagents", "token-efficiency"]
     }

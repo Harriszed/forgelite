@@ -14,7 +14,8 @@ Goal: an independent reviewer who has not seen this chat finds the bugs before t
    - Crashes or stack traces shown to the user, and anything that could hang or freeze.
    - Error messages that do not say what is wrong and what is expected.
    - Spec requirements with no test, and changes outside the plan.
-   - Security: untrusted input reaching a shell, query, file path or HTML; secrets in the diff.
+   - Security: untrusted input reaching a shell, query, file path or HTML; secrets in the diff. Any limit, quota, price or permission that depends on a value the app or user sends (a time, an id, a count, a flag) is a Critical finding unless the server checks or bounds it.
+   - Known gaps the spec lists: did this change make any of them easier to exploit?
    - Report in under 500 words, ranked: **Critical** (wrong result, data loss, security), **Important** (bug in a likely path, missing test), **Minor** (clarity, small cleanups). Each finding: `file:line`, what goes wrong, how it was shown, the suggested fix. Say plainly if nothing real was found.
 3. **Act on it** with `forgelite:receiving-review`.
 

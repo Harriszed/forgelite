@@ -6,7 +6,7 @@
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-eb6834"></a>
   <img alt="Claude Code plugin" src="https://img.shields.io/badge/Claude%20Code-plugin-c2410c">
   <img alt="10 skills" src="https://img.shields.io/badge/skills-10-fbbf24">
-  <img alt="291 lines" src="https://img.shields.io/badge/instructions-291%20lines-9a3412">
+  <img alt="295 lines" src="https://img.shields.io/badge/instructions-295%20lines-9a3412">
 </p>
 
 # Forgelite
@@ -24,7 +24,7 @@ Forgelite is built on the ideas of [**Superpowers**](https://github.com/obra/sup
 |  | Superpowers 7.0.0 | Forgelite |
 |---|---|---|
 | Skills | 15 | **10** |
-| Instruction lines | 3,828 | **291** |
+| Instruction lines | 3,828 | **295** |
 | Text injected at every session start | ~3,200 chars | **336 chars** |
 | Independent reviews (spec, plan, final code) | yes | yes |
 | Test-first building | yes | yes |
@@ -90,12 +90,25 @@ Total cost index 9.3M (design 3.9M, build 5.4M), about 0.49M per task against 0.
 - **Went well:** Opus ran only the database task and the final review. The plan review found 12 problems. The final review found 5 real bugs (including a timing bug that made something run several times too fast). 9,756 tests passing.
 - **Found, fixed in 0.4.4:** the build chat grew to 418k tokens and cost the most of any part (now batches of 8 tasks); 8 of 19 tasks were too big and needed a second agent (the plan reviewer now checks task size); two parallel agents overwrote each other's files (tasks that share a file now run in sequence); a timed loop kept waking the huge chat (no `/loop` during builds).
 
-**Test 3 (latest): version 0.5.0, a fix round on an existing feature in a mobile app (about 16 tasks)**
+**Test 3: version 0.5.0, a fix round on an existing feature in a mobile app (about 16 tasks)**
 
 Total cost index 4.4M (design and plan 2.3M, build in two batches 0.8M and 1.3M), about 0.3M per task against 0.49M in test 2.
 
 - **Went well:** the 8-task batches worked. The two build chats stayed at 132k and 168k tokens (test 2 reached 418k), and the main build chat cost fell from 1.6M to 0.26M. Every task ran on Sonnet, the biggest took 28 tool calls, none needed a second agent, and tasks that shared files ran one after another with no clashes. The plan review found 16 problems and the final review found 6, all fixed. 9,881 tests passing.
 - **Found, fixed in 0.5.1:** the design chat became the biggest cost (65 calls on Opus, 241k tokens, 1.6M). Once the spec is approved, planning now moves to a fresh Opus session, after checking every decision is written in the spec.
+
+**Test 4 (latest): versions 0.5.0 and 0.5.1, two features in a mobile app (6 and 7 tasks)**
+
+One was a privacy clean-up when an account is deleted. The other was a daily limit on a paid feature, shaped, planned and built in three fresh sessions.
+
+- **Went well:** the new review skills ran in order and the Opus reviews found real bugs with reproductions: auth tokens leaking into crash reports, a timeout that could hang an hourly job, and a way for a modified app to switch the daily limit off. Each phase handed over to a fresh session, and the plan review caught 3 problems that would have broken the build.
+- **Found, fixed in 0.5.2:**
+  - A 6-task build done inside the main chat reached 287k tokens. The main chat now only coordinates, every task goes to a subagent, and the chat hands over at about 150k.
+  - `verifying` was skipped when the prompt ended with "then push". It now always runs first.
+  - The limit hole got past both the spec and plan reviews. Every reviewer now treats a limit, price or permission decided by a value the app sends as Critical.
+  - The security fix was not reviewed again, so fixes touching security, money or limits now get a second review of just the fix.
+  - The plan was never committed, so specs and plans are now committed once approved.
+  - Rollout questions ran on in the build chat at 150-200k tokens. `finishing` now lists the rollout steps and points to a fresh session, and keeps a long-running phase branch without asking.
 
 ## Install
 
