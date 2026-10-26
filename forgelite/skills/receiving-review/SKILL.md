@@ -19,4 +19,4 @@ Goal: every real finding fixed and proven, every wrong one answered with evidenc
 
 - No "great catch", "you're absolutely right" or thanks: state what you checked and what you did.
 - Never loosen or delete a test to make a finding go away.
-- After fixes from an Opus review with Critical findings, re-run `forgelite:requesting-review` once on the new commits.
+- Re-run `forgelite:requesting-review` once, on the fix commits only, when the review had Critical findings or any fix touches security, money, limits or permissions. A fix in those areas is new code nobody has checked.

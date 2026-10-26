@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.2
+- `building`: the main chat only coordinates; every task, dependent ones included, goes to a fresh subagent unless it is tiny. The chat also hands over at about 150k tokens, even mid-batch.
+- `building`: `forgelite:verifying` runs even when the user's prompt gives its own ending such as "then push".
+- Spec, plan and code reviewers treat any limit, quota, price or permission that depends on a value the app sends as Critical unless the server checks it. Plan fixes must not widen the spec's Known gaps.
+- `shaping`: specs gain a Known gaps section; `requesting-review` checks whether the change made any of them worse.
+- `receiving-review`: fixes that touch security, money, limits or permissions get one more review of the fix commits.
+- `shaping` and `planning` commit the approved spec and plan.
+- `finishing`: keeps a long-running phase or release branch without asking, lists rollout steps in order, and points rollout questions to a fresh session.
+
 ## 0.5.1
 - `shaping`: once the spec is approved, planning moves to a fresh Opus session (after checking every decision is written in the spec). A long design chat is no longer carried through planning.
 

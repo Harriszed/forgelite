@@ -23,15 +23,16 @@ Building is best done on Sonnet (cheaper, and the plan already holds the thinkin
 
 ## Running the plan
 
+- This chat only coordinates. Every task goes to a fresh subagent, dependent ones included; build a task here only if it is tiny (a few lines in one file). Building in this chat makes it grow with every file read and test log.
 - Independent tasks: dispatch one fresh subagent per task, never merging two tasks into one (in parallel only when their file lists do not overlap at all; tasks that share any file run one after another). Give each the task text, the spec and plan paths, and the files it may touch. Do not paste the plan or pass conversation history.
 - Every subagent prompt ends with: "Reply in under 150 words: what changed, commit-ready file list, test result (pass/fail counts), anything blocked. No code, no pasted output." Long reports pile up in this chat and fill its context.
 - If a subagent is still going after about 40 tool calls, it is probably too big or stuck: have it stop and hand over (see below) instead of continuing.
-- Dependent tasks: run in order.
+- Dependent tasks: run in order, each in its own fresh subagent.
 - After each parallel group finishes, run the full test suite once yourself before starting the next group.
 - After each subagent returns, read its diff and test output yourself before moving on. A report is not proof.
 - If a task is blocked or the plan is wrong, stop and tell the user what is wrong and your recommended fix. Never quietly improvise around the plan.
 - If a bug appears, switch to `forgelite:debugging`.
-- Work in batches of at most 8 tasks per chat, or fewer if the chat has had a lot of big outputs (long diffs, test logs, big files). A fresh session reloads the project context once, which is cheaper than carrying a growing chat. At the end of a batch, finish and commit the current task, write `docs/forgelite/handovers/progress.md` (tasks done with commits, tasks left, decisions, anything surprising), then tell the user to open a new Sonnet session and say: "continue the plan at <plan path>; progress note at <note path>". The final review and `forgelite:verifying` run only after the LAST task, always in full. Do not use `/loop` or timed wake-ups during a build.
+- Work in batches of at most 8 tasks per chat, or fewer if the chat has had a lot of big outputs (long diffs, test logs, big files). A fresh session reloads the project context once, which is cheaper than carrying a growing chat. At the end of a batch, finish and commit the current task, write `docs/forgelite/handovers/progress.md` (tasks done with commits, tasks left, decisions, anything surprising), then tell the user to open a new Sonnet session and say: "continue the plan at <plan path>; progress note at <note path>". Hand over the same way at the next task boundary if this chat passes about 150k tokens of context, even mid-batch (signs: many large files read, long test logs, a compaction warning). The final review and `forgelite:verifying` run only after the LAST task, always in full. Do not use `/loop` or timed wake-ups during a build.
 
 ## Model choice (save tokens)
 
@@ -60,8 +61,8 @@ When a subagent hands over, read the handover file, then continue the same agent
 When all tasks are done, run these steps in order without asking whether to: they are required, not optional.
 1. Invoke `forgelite:requesting-review` (always Opus at high effort) on the full branch diff against the spec and plan.
 2. Invoke `forgelite:receiving-review` on its report, adding a test for each real finding.
-3. Invoke `forgelite:verifying` with the Skill tool (do not just run checks inline). Once it passes, delete `docs/forgelite/handovers/`: handover and progress notes are working files, never committed.
-4. Invoke `forgelite:finishing` so the user chooses where the branch goes.
+3. Invoke `forgelite:verifying` with the Skill tool (do not just run checks inline). This holds even when the user's prompt gives its own ending, such as "then push": verifying runs before that push. Once it passes, delete `docs/forgelite/handovers/`: handover and progress notes are working files, never committed.
+4. Invoke `forgelite:finishing` so the branch ends up where the user wants it.
 
 ## Rules
 
