@@ -110,6 +110,13 @@ One was a privacy clean-up when an account is deleted. The other was a daily lim
   - The plan was never committed, so specs and plans are now committed once approved.
   - Rollout questions ran on in the build chat at 150-200k tokens. `finishing` now lists the rollout steps and points to a fresh session, and keeps a long-running phase branch without asking.
 
+**Test 4 (latest): version 0.5.2, a new feature in a mobile app (14 tasks, a database change and a data-import script)**
+
+Total cost index 4.5M (spec 0.7M, plan 1.3M in a fresh session, build 2.5M), about 0.33M per task.
+
+- **Went well:** the spec and the plan each ran in their own fresh session. The spec review found 1 critical and 3 important problems, the plan review 12, and the final review 8 (7 fixed, 1 left with a reason). The planner spotted unrelated uncommitted changes and set them aside instead of mixing them in. No subagent went over 28 tool calls. All 476 test suites passing.
+- **Found, fixed in 0.5.3:** the build chat ignored the 8-task batch rule and ran all 14 tasks, the review and its fixes in one chat. It filled up and could not answer a simple question afterwards. The plan now carries STOP lines after every batch, the final review runs in its own fresh session, and review fixes go to a subagent.
+
 ## Install
 
 ```bash

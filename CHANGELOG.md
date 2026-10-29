@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.3
+- `planning`: the plan itself is split into batches of at most 8 tasks, with a STOP line after each, and ends with a separate Review batch. The plan reviewer checks them.
+- `building`: stops at every STOP line (or after 8 tasks if the plan has none) instead of relying on a count kept in the chat.
+- The final review runs in its own fresh session, and its fixes go to a subagent, so the build chat never fills up.
+
 ## 0.5.2
 - `building`: the main chat only coordinates; every task, dependent ones included, goes to a fresh subagent unless it is tiny. The chat also hands over at about 150k tokens, even mid-batch.
 - `building`: `forgelite:verifying` runs even when the user's prompt gives its own ending such as "then push".

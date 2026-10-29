@@ -32,7 +32,7 @@ Building is best done on Sonnet (cheaper, and the plan already holds the thinkin
 - After each subagent returns, read its diff and test output yourself before moving on. A report is not proof.
 - If a task is blocked or the plan is wrong, stop and tell the user what is wrong and your recommended fix. Never quietly improvise around the plan.
 - If a bug appears, switch to `forgelite:debugging`.
-- Work in batches of at most 8 tasks per chat, or fewer if the chat has had a lot of big outputs (long diffs, test logs, big files). A fresh session reloads the project context once, which is cheaper than carrying a growing chat. At the end of a batch, finish and commit the current task, write `docs/forgelite/handovers/progress.md` (tasks done with commits, tasks left, decisions, anything surprising), then tell the user to open a new Sonnet session and say: "continue the plan at <plan path>; progress note at <note path>". Hand over the same way at the next task boundary if this chat passes about 150k tokens of context, even mid-batch (signs: many large files read, long test logs, a compaction warning). The final review and `forgelite:verifying` run only after the LAST task, always in full. Do not use `/loop` or timed wake-ups during a build.
+- **Stop at every STOP line in the plan.** Finish and commit the current task, write `docs/forgelite/handovers/progress.md` (tasks done with commits, tasks left, decisions, anything surprising), then tell the user to open a new Sonnet session and say: "continue the plan at <plan path>; progress note at <note path>". Do not start the next batch in this chat, even if it seems small. If the plan has no STOP lines, stop after 8 tasks anyway. Also stop at the next task boundary if this chat passes about 150k tokens (signs: many large files read, long test logs, a compaction warning). Some chat windows end at 200k, and a full chat cannot even answer a question. Do not use `/loop` or timed wake-ups during a build.
 
 ## Model choice (save tokens)
 
@@ -58,9 +58,9 @@ When a subagent hands over, read the handover file, then continue the same agent
 
 ## Finishing
 
-When all tasks are done, run these steps in order without asking whether to: they are required, not optional.
+When all build tasks are done, stop and hand over: the review runs in its own fresh Sonnet session (the plan's Review batch), so the reviewer's report and the fixes land in a clean chat. In that session, run these steps in order without asking whether to: they are required, not optional.
 1. Invoke `forgelite:requesting-review` (always Opus at high effort) on the full branch diff against the spec and plan.
-2. Invoke `forgelite:receiving-review` on its report, adding a test for each real finding.
+2. Invoke `forgelite:receiving-review` on its report, adding a test for each real finding. Send the fixes to a fresh `sonnet` subagent (Opus if a fix touches a migration, security or payments) with the findings list and file paths; this chat checks each fix, never makes them itself unless a fix is a few lines.
 3. Invoke `forgelite:verifying` with the Skill tool (do not just run checks inline). This holds even when the user's prompt gives its own ending, such as "then push": verifying runs before that push. Once it passes, delete `docs/forgelite/handovers/`: handover and progress notes are working files, never committed.
 4. Invoke `forgelite:finishing` so the branch ends up where the user wants it.
 
